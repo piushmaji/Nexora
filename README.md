@@ -15,7 +15,7 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/🚀_LIVE_DEMO-000000?style=for-the-badge&logoColor=E8541A)](https://https://nexorabypiush.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/🚀_LIVE_DEMO-000000?style=for-the-badge&logoColor=E8541A)](https://nexorabypiush.vercel.app/)
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black)](https://gsap.com/)
