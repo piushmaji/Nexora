@@ -2,14 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import bag from "../../assets/icons/bag.png"
-import book from "../../assets/icons/notebook.png"
-import weathe from "../../assets/icons/weather.png"
-import mirand from "../../assets/icons/miranda.png"
-import k7 from "../../assets/icons/k72.png"
 
-import storex from "../../assets/Projects/StoreX.png"
-import notebook from "../../assets/Projects/notebook1.png"
+import storex from "../../assets/Projects/storex.png"
+import notebook from "../../assets/Projects/Notebook1.png"
 import k72 from "../../assets/Projects/k72.png"
 import miranda from "../../assets/Projects/miranda.png"
 import weather from "../../assets/Projects/weather.png"
