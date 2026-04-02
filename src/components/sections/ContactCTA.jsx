@@ -148,7 +148,7 @@ export default function ContactCTA() {
         {/* Hover Pill Button */}
         <a
           ref={btnRef}
-          href="mailto:piushmajibtecg@gmail.com"
+          href="mailto:piushmajibtech@gmail.com"
           className="relative inline-flex items-center justify-center group overflow-hidden"
           style={{
             background: "#0c0c0c",

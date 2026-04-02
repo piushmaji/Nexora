@@ -3,10 +3,16 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import bag from "../../assets/icons/bag.png"
-import notebook from "../../assets/icons/notebook.png"
-import weather from "../../assets/icons/weather.png"
-import miranda from "../../assets/icons/miranda.png"
-import k72 from "../../assets/icons/k72.png"
+import book from "../../assets/icons/notebook.png"
+import weathe from "../../assets/icons/weather.png"
+import mirand from "../../assets/icons/miranda.png"
+import k7 from "../../assets/icons/k72.png"
+
+import storex from "../../assets/Projects/StoreX.png"
+import notebook from "../../assets/Projects/notebook1.png"
+import k72 from "../../assets/Projects/k72.png"
+import miranda from "../../assets/Projects/miranda.png"
+import weather from "../../assets/Projects/weather.png"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,8 +21,9 @@ const projects = [
     num: "01 / 05",
     name: "StoreX",
     desc: "A fully-featured e-commerce platform with product management, cart, real-time inventory updates and a smooth checkout flow. Built with a focus on scalable architecture and clean UX.",
-    tags: ["React", "Tailwind", "Node.js", "MongoDB"],
-    emoji: bag,
+    tags: ["React", "Tailwind","Supabase",],
+    image:storex ,
+    liveLink: "https://storexpi.vercel.app/",
     accent: "#E8541A",
   },
   {
@@ -24,7 +31,8 @@ const projects = [
     name: "Notebook",
     desc: "A real-time notes application powered by Supabase for seamless data sync. Create, organise, and access notes from anywhere with instant persistence and markdown support.",
     tags: ["React", "Supabase", "Tailwind"],
-    emoji: notebook,
+    image: notebook,
+    liveLink: "https://notebookpi.netlify.app/",
     accent: "#E8541A",
   },
   {
@@ -32,7 +40,8 @@ const projects = [
     name: "Weather App",
     desc: "A live weather dashboard with location-based forecasts, dynamic backgrounds, and real-time API integration. Delivers accurate data with a visually expressive responsive interface.",
     tags: ["JavaScript", "REST API", "CSS"],
-    emoji: weather,
+    image: weather,
+    liveLink: "https://weather-application-cyan-three.vercel.app/",
     accent: "#E8541A",
   },
   {
@@ -40,7 +49,8 @@ const projects = [
     name: "Miranda",
     desc: "A polished web project with a strong visual identity, fluid animations, and a highly interactive user experience. Built to push creative boundaries while maintaining performance.",
     tags: ["React", "CSS", "Animation"],
-    emoji: miranda,
+    image: miranda,
+    liveLink: "https://github.com/piushmaji/Miranda",
     accent: "#E8541A",
   },
   {
@@ -48,29 +58,20 @@ const projects = [
     name: "K72 Animated Site",
     desc: "A high-fidelity animated website built in React with immersive page transitions, scroll-driven motion, and layered visual storytelling. Creative development at its finest.",
     tags: ["React", "GSAP", "Tailwind"],
-    emoji: k72,
+    image: k72,
+    liveLink: "https://accuil-k72.vercel.app/",
     accent: "#E8541A",
   },
 ];
 
-function DotGrid() {
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 5px)", gap: "4px" }}>
-      {Array(9).fill(0).map((_, i) => (
-        <div key={i} style={{ width: 5, height: 5, borderRadius: "50%", background: "white" }} />
-      ))}
-    </div>
-  );
-}
-
 function ProjectCard({ project, index }) {
   return (
     <div
-      className="glow-border rounded-3xl overflow-hidden relative shadow-2xl flex flex-col md:flex-row flex-shrink-0 mr-8 md:mr-20"
+      className="rounded-[2rem] overflow-hidden relative shadow-2xl flex flex-col md:flex-row flex-shrink-0 mr-8 md:mr-20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,84,26,0.15)]"
       style={{
         width: "clamp(320px, 85vw, 950px)",
         background: "#0c0c0c",
-        border: "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid rgba(232,84,26,0.3)",
         boxShadow: "0 20px 40px -10px rgba(0,0,0,0.8)",
         minHeight: "450px",
       }}
@@ -103,6 +104,7 @@ function ProjectCard({ project, index }) {
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
               letterSpacing: "0.02em",
+              textShadow: "2px 2px 0px rgba(0,0,0,0.5)"
             }}
           >
             {project.name}
@@ -136,38 +138,47 @@ function ProjectCard({ project, index }) {
         </div>
       </div>
 
-      {/* Right Callout Visual */}
+      {/* Right Callout Visual (Image Preview & Live Link) */}
       <div
-        className="w-full md:w-[320px] lg:w-[400px] relative flex flex-col items-center justify-center py-12 md:py-0 border-t md:border-t-0 md:border-l border-[rgba(232,84,26,0.2)]"
-        style={{
-          background: "#111111",
-        }}
+        className="w-full md:w-[350px] lg:w-[420px] relative flex flex-col items-center justify-center p-8 md:p-0 border-t md:border-t-0 md:border-l border-[rgba(232,84,26,0.2)]"
+        style={{ background: "#080808" }}
       >
-        <div className="absolute top-6 right-6 opacity-30">
-          <DotGrid />
+        
+        {/* Device Wrapper */}
+        <div className="relative w-full max-w-[280px] h-[340px] md:h-[80%] rounded-[1.5rem] overflow-hidden border border-[#222] shadow-[0_15px_30px_rgba(0,0,0,0.5)] group">
+          
+          {/* Mock Screenshot Image */}
+          <img 
+            src={project.image} 
+            alt={`${project.name} preview`}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+
+          {/* Floating Live Link Arrow Button */}
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-4 right-4 w-12 h-12 bg-[#111] hover:bg-[#E8541A] rounded-xl flex items-center justify-center transition-colors duration-300 z-10 border border-[#333] shadow-lg group/btn"
+            aria-label={`View ${project.name} live demo`}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="w-5 h-5 text-white transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+            >
+              /* Stylized 4-dot / expanding arrow mimicking reference */
+              <path d="M7 17L17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
+          </a>
         </div>
 
-        {/* Emoji Badge / Mockup Icon */}
-        <div
-          className="flex items-center justify-center rounded-2xl group transition-transform duration-300 hover:scale-105 cursor-pointer"
-          style={{
-            width: "clamp(120px, 15vw, 180px)",
-            height: "clamp(160px, 20vw, 220px)",
-            background: "linear-gradient(135deg, #1f1f1f, #111)",
-            fontSize: "clamp(3.5rem, 5vw, 5rem)",
-            border: "1px solid #333",
-            boxShadow: "0 10px 20px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.05)",
-            flexDirection: "column",
-            gap: "0.5rem",
-          }}
-        >
-          <span className="group-hover:-translate-y-2 transition-transform duration-300 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-            <img src={project.emoji} alt={project.name} className="w-full h-full object-contain" />
-          </span>
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ fontSize: "0.6rem", color: "#E8541A", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "'Inter',sans-serif" }}>
-            Preview App
-          </span>
-        </div>
       </div>
     </div>
   );
