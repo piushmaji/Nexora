@@ -62,9 +62,9 @@ const projects = [
 function ProjectCard({ project, index }) {
   return (
     <div
-      className="rounded-[2rem] overflow-hidden relative shadow-2xl flex flex-col md:flex-row flex-shrink-0 mr-8 md:mr-20 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,84,26,0.15)]"
+      className="rounded-[2rem] overflow-hidden relative shadow-2xl flex flex-col md:flex-row flex-shrink-0 md:mr-20 mb-8 md:mb-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,84,26,0.15)] max-w-full"
       style={{
-        width: "clamp(320px, 85vw, 950px)",
+        width: "clamp(300px, 90vw, 950px)",
         background: "#0c0c0c",
         border: "1px solid rgba(232,84,26,0.3)",
         boxShadow: "0 20px 40px -10px rgba(0,0,0,0.8)",
@@ -185,7 +185,7 @@ export default function Projects() {
   const titleRef = useRef(null);
 
   useEffect(() => {
-    // Reveal the title when reaching the section
+    // General Fade for Title
     gsap.fromTo(
       titleRef.current,
       { opacity: 0, scale: 0.9, y: 50 },
@@ -199,31 +199,32 @@ export default function Projects() {
       }
     );
 
-    // HORIZONTAL PINNING LOGIC
-    const pinWrap = containerRef.current;
-    
-    // Calculate exactly how far left the container needs to travel so the last card aligns perfectly
-    const getScrollAmount = () => {
-      let pinWrapWidth = pinWrap.scrollWidth;
-      return -(pinWrapWidth - window.innerWidth + 100); 
-    };
+    let mm = gsap.matchMedia();
 
-    const tween = gsap.to(pinWrap, {
-      x: getScrollAmount,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        pin: true,           // Locks the entire section to the viewport
-        scrub: 1,            // Ties horizontal movement smoothly to vertical scroll wheel
-        end: () => `+=${getScrollAmount() * -1}`, // The horizontal distance dictates how long the vertical pin lasts
-        invalidateOnRefresh: true, // Recalculate widths if user resizes window
-      }
+    // HORIZONTAL PINNING LOGIC - ONLY for Desktop / Tablets
+    mm.add("(min-width: 768px)", () => {
+      const pinWrap = containerRef.current;
+      
+      const getScrollAmount = () => {
+        let pinWrapWidth = pinWrap.scrollWidth;
+        return -(pinWrapWidth - window.innerWidth + 100); 
+      };
+
+      gsap.to(pinWrap, {
+        x: getScrollAmount,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,           // Locks the entire section
+          scrub: 1,            // Ties horizontal movement to vertical scroll
+          end: () => `+=${getScrollAmount() * -1}`, 
+          invalidateOnRefresh: true, 
+        }
+      });
     });
 
     return () => {
-      // Cleanup
-      if (tween.scrollTrigger) tween.scrollTrigger.kill();
-      tween.kill();
+      mm.revert(); // Automatically kills triggers and restores state for breakpoints
     };
   }, []);
 
@@ -243,18 +244,18 @@ export default function Projects() {
         `}
       </style>
 
-      {/* Main Title - It will stay planted since the section is pinned */}
-      <div ref={titleRef} className="absolute top-12 md:top-24 w-full flex flex-col items-center opacity-0 z-10 pointer-events-none">
-        <h2 className="font-['Bebas_Neue'] text-5xl md:text-7xl lg:text-9xl tracking-widest text-3d uppercase text-center drop-shadow-2xl">
+      {/* Main Title - Native scroll relative on mobile, sticky/pinned on desktop */}
+      <div ref={titleRef} className="md:absolute md:top-24 mt-12 md:mt-0 w-full flex flex-col items-center opacity-0 z-10 md:pointer-events-none relative mb-12 md:mb-0">
+        <h2 className="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-9xl tracking-widest text-3d uppercase text-center drop-shadow-2xl">
           My Projects
         </h2>
       </div>
 
       {/* The Horizontal Slide Track */}
       {/* Starting heavily margined to avoid the title, pushing it downwards natively */}
-      <div className="relative w-full h-full mt-24 md:mt-32">
-        {/* The w-max forces this div to be wider than the screen based on children widths */}
-        <div ref={containerRef} className="flex flex-row w-max pl-[5vw] lg:pl-[10vw] pt-10">
+      <div className="relative w-full h-full md:mt-64 lg:mt-72">
+        {/* On mobile: standard vertical stack. On desktop: horizontal row sliding left */}
+        <div ref={containerRef} className="flex flex-col items-center md:items-start md:flex-row md:w-max md:pl-[5vw] lg:pl-[10vw]">
           {projects.map((p, i) => (
             <ProjectCard key={i} project={p} index={i} total={projects.length} />
           ))}
