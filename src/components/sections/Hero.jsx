@@ -92,7 +92,7 @@ export default function Hero() {
         </div>
 
         {/* Right Floating Content */}
-        <div ref={rightBlockRef} className="md:absolute right-6 lg:right-16 flex flex-col items-center md:items-start gap-4 max-w-[300px] z-30 text-center md:text-left mt-8 md:mt-0">
+        <div ref={rightBlockRef} className="md:absolute right-6 lg:right-16 flex flex-col items-center md:items-start gap-4 max-w-[300px] z-30 text-center md:text-left mt-8 mb-40 md:mb-0 md:mt-0">
           <p className="text-[#a0a0a0] text-base leading-relaxed font-light">
             Code in one hand, architecture in the other – I build UI experiences that bridge both worlds.
           </p>
