@@ -229,7 +229,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#050505] min-h-screen relative overflow-hidden flex flex-col justify-center py-20">
+    <section ref={sectionRef} className="bg-[#050505] min-h-screen relative overflow-hidden flex flex-col justify-center py-16 md:py-10">
       {/* Shared 3D Title Styling */}
       <style>
         {`
@@ -244,16 +244,15 @@ export default function Projects() {
         `}
       </style>
 
-      {/* Main Title - Native scroll relative on mobile, sticky/pinned on desktop */}
-      <div ref={titleRef} className="md:absolute md:top-24 mt-12 md:mt-0 w-full flex flex-col items-center opacity-0 z-10 md:pointer-events-none relative mb-12 md:mb-0">
+      {/* Main Title - Naturally sits at the top of the flex block, pinned natively by the section trigger */}
+      <div ref={titleRef} className="w-full flex flex-col items-center opacity-0 z-10 relative mb-12 md:mb-16">
         <h2 className="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-9xl tracking-widest text-3d uppercase text-center drop-shadow-2xl">
           My Projects
         </h2>
       </div>
 
       {/* The Horizontal Slide Track */}
-      {/* Starting heavily margined to avoid the title, pushing it downwards natively */}
-      <div className="relative w-full h-full md:mt-64 lg:mt-72">
+      <div className="relative w-full h-full flex flex-col justify-center">
         {/* On mobile: standard vertical stack. On desktop: horizontal row sliding left */}
         <div ref={containerRef} className="flex flex-col items-center md:items-start md:flex-row md:w-max md:pl-[5vw] lg:pl-[10vw]">
           {projects.map((p, i) => (
